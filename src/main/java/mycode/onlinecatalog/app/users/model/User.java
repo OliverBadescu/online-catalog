@@ -72,7 +72,7 @@ public class User {
     @Builder.Default
     @ToString.Exclude
     @JsonManagedReference
-    private Set<Grade> appointments = new HashSet<>();
+    private Set<Grade> grades = new HashSet<>();
 
 
 }
