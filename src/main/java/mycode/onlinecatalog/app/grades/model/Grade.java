@@ -3,6 +3,7 @@ package mycode.onlinecatalog.app.grades.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
+import mycode.onlinecatalog.app.feedback.model.Feedback;
 import mycode.onlinecatalog.app.users.model.User;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
@@ -42,17 +43,14 @@ public class Grade {
     )
     private int grade;
 
-    @Column(
-            name = "feedback",
-            nullable = false,
-            columnDefinition = "TEXT"
-    )
-    private String feedback;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonBackReference
     private User user;
+
+    @OneToOne(mappedBy = "grade")
+    private Feedback feedback;
+
 
 }
