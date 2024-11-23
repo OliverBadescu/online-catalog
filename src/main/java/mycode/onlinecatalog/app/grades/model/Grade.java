@@ -1,10 +1,14 @@
 package mycode.onlinecatalog.app.grades.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import mycode.onlinecatalog.app.feedback.model.Feedback;
 import mycode.onlinecatalog.app.users.model.User;
+
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
@@ -43,6 +47,14 @@ public class Grade {
     )
     private int grade;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @Column(
+            name = "create-date",
+            nullable = false,
+            columnDefinition = "TIMESTAMP"
+    )
+    private LocalDateTime createDate;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -51,6 +63,19 @@ public class Grade {
 
     @OneToOne(mappedBy = "grade")
     private Feedback feedback;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Grade gradeObj = (Grade) o;
+        return id == gradeObj.id && Objects.equals(createDate, gradeObj.createDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, createDate);
+    }
 
 
 }

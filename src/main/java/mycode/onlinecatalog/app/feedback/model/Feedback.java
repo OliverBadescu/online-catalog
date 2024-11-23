@@ -6,6 +6,8 @@ import lombok.*;
 import mycode.onlinecatalog.app.grades.model.Grade;
 import mycode.onlinecatalog.app.users.model.User;
 
+import java.util.Objects;
+
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 @AllArgsConstructor
@@ -55,4 +57,16 @@ public class Feedback {
     @JoinColumn(name = "grade_id", referencedColumnName = "id")
     private Grade grade;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Feedback gradeObj = (Feedback) o;
+        return id == gradeObj.id && Objects.equals(title, gradeObj.title) && Objects.equals(grade, gradeObj.grade);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title,grade);
+    }
 }
