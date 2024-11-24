@@ -61,8 +61,9 @@ public class Grade {
     @JsonBackReference
     private User user;
 
-    @OneToOne(mappedBy = "grade")
+    @OneToOne(mappedBy = "grade", cascade = CascadeType.ALL, orphanRemoval = true)
     private Feedback feedback;
+
 
     @Override
     public boolean equals(Object o) {
