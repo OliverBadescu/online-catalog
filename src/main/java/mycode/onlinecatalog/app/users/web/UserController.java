@@ -20,22 +20,22 @@ public class UserController {
     private UserCommandService userCommandService;
     private UserQueryService userQueryService;
     
-    @GetMapping(path = "/{userId}")
+    @GetMapping(path = "/getUser/{userId}")
     public ResponseEntity<UserResponse> getUser(@PathVariable long userId){
         return new ResponseEntity<>(userQueryService.findUserById(userId), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<UserResponse> addUser(@RequestBody CreateUserRequest createUserRequest){
         return new ResponseEntity<>(userCommandService.createUser(createUserRequest), HttpStatus.CREATED);
     }
 
-    @DeleteMapping(path = "/{userId}")
+    @DeleteMapping(path = "/delete/{userId}")
     public ResponseEntity<UserResponse> deleteUser(@PathVariable long userId){
         return new ResponseEntity<>(userCommandService.deleteUser(userId), HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/{userId}")
+    @PutMapping(path = "/update/{userId}")
     public ResponseEntity<UserResponse> updateUser(@PathVariable long userId, @RequestBody UpdateUserRequest updateUserRequest){
     return new ResponseEntity<>(userCommandService.updateUser(updateUserRequest, userId), HttpStatus.ACCEPTED);
     }
