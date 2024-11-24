@@ -53,7 +53,7 @@ public class Feedback {
     private String message;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "grade_id", referencedColumnName = "id")
     private Grade grade;
 
