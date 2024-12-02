@@ -43,4 +43,9 @@ public class GradeController {
         return new ResponseEntity<>(gradeCommandService.updateGrade(gradeId, updateGradeRequest), HttpStatus.ACCEPTED);
     }
 
+    @GetMapping("/getGradeById/{gradeId}")
+    public ResponseEntity<GradeResponse> getGradeById(@PathVariable long gradeId){
+        return new ResponseEntity<>(gradeQueryService.getGradeById(gradeId),HttpStatus.OK);
+    }
+
 }
