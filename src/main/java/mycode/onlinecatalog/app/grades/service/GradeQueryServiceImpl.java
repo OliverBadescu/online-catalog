@@ -20,7 +20,7 @@ public class GradeQueryServiceImpl implements GradeQueryService{
     private GradeRepository gradeRepository;
     @Override
     public GradeResponse getGradeById(long gradeId) {
-        return null;
+        return GradeMapper.gradeToResponseDto(gradeRepository.findById(gradeId).orElseThrow(() -> new NoGradeFound("No grade with this id found")));
     }
 
     @Override
