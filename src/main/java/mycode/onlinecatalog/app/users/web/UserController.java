@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import mycode.onlinecatalog.app.users.dtos.CreateUserRequest;
 import mycode.onlinecatalog.app.users.dtos.UpdateUserRequest;
 import mycode.onlinecatalog.app.users.dtos.UserResponse;
+import mycode.onlinecatalog.app.users.dtos.UserResponseList;
 import mycode.onlinecatalog.app.users.model.User;
 import mycode.onlinecatalog.app.users.service.UserCommandService;
 import mycode.onlinecatalog.app.users.service.UserQueryService;
@@ -15,12 +16,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
     
     private UserCommandService userCommandService;
     private UserQueryService userQueryService;
     
-    @GetMapping(path = "/getUser/{userId}")
+    @GetMapping(path = "/getUserById/{userId}")
     public ResponseEntity<UserResponse> getUser(@PathVariable long userId){
         return new ResponseEntity<>(userQueryService.findUserById(userId), HttpStatus.OK);
     }
@@ -38,5 +40,10 @@ public class UserController {
     @PutMapping(path = "/update/{userId}")
     public ResponseEntity<UserResponse> updateUser(@PathVariable long userId, @RequestBody UpdateUserRequest updateUserRequest){
     return new ResponseEntity<>(userCommandService.updateUser(updateUserRequest, userId), HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/getAllUsers")
+    public ResponseEntity<UserResponseList> getAllUsers(){
+        return new ResponseEntity<>(userQueryService.getAllUsers(),HttpStatus.OK);
     }
 }

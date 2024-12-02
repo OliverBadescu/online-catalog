@@ -10,9 +10,9 @@ public class UserMapper {
     public static UserResponse userToResponseDto(User user) {
         return new UserResponse(
                 user.getId(),
-                user.getFullName(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getFullName(),
                 user.getPhone());
     }
 

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/grade")
+@CrossOrigin
 public class GradeController {
 
     private GradeCommandService gradeCommandService;

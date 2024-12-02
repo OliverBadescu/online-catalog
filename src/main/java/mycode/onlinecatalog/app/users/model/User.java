@@ -2,6 +2,7 @@ package mycode.onlinecatalog.app.users.model;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import mycode.onlinecatalog.app.grades.model.Grade;
@@ -39,7 +40,7 @@ public class User {
     )
     private long id;
 
-
+    @JsonProperty("email")
     @Column(
             name = "email",
             nullable = false,
@@ -54,6 +55,7 @@ public class User {
     )
     private String password;
 
+    @JsonProperty("fullName")
     @Column(
             name = "full_name",
             nullable = false,
@@ -61,6 +63,7 @@ public class User {
     )
     private String fullName;
 
+    @JsonProperty("phone")
     @Column(
             name = "phone",
             nullable = false,
