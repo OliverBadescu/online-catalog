@@ -2,6 +2,7 @@ package mycode.onlinecatalog.app.users.service;
 
 
 import lombok.AllArgsConstructor;
+import mycode.onlinecatalog.app.system.security.UserRole;
 import mycode.onlinecatalog.app.users.dtos.CreateUserRequest;
 import mycode.onlinecatalog.app.users.dtos.UpdateUserRequest;
 import mycode.onlinecatalog.app.users.dtos.UserResponse;
@@ -28,6 +29,7 @@ public class UserCommandServiceImpl implements UserCommandService{
                 .password(createUserRequest.password())
                 .fullName(createUserRequest.fullName())
                 .email(createUserRequest.email())
+                .userRole(UserRole.CLIENT)
                 .build();
 
         List<User> list = userRepository.findAll();

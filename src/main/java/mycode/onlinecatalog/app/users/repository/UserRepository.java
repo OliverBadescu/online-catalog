@@ -11,4 +11,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @EntityGraph(attributePaths = {"grades"}, type = EntityGraph.EntityGraphType.FETCH)
     Optional<User> findById(long id);
 
+    @EntityGraph(attributePaths = {"grades"}, type = EntityGraph.EntityGraphType.FETCH)
+    Optional<User> findByEmail(String email);
+
 }
