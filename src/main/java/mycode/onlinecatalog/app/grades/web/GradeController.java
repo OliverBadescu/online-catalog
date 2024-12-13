@@ -2,6 +2,7 @@ package mycode.onlinecatalog.app.grades.web;
 
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mycode.onlinecatalog.app.grades.dtos.CreateGradeRequest;
 import mycode.onlinecatalog.app.grades.dtos.GradeResponse;
 import mycode.onlinecatalog.app.grades.dtos.GradeResponseList;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RequestMapping("/grade")
 @CrossOrigin
+@Slf4j
 public class GradeController {
 
     private GradeCommandService gradeCommandService;

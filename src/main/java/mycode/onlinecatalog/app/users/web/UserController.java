@@ -89,6 +89,7 @@ public class UserController {
         HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
         LoginResponse loginResponse = new LoginResponse(
                 jwtHeader.getFirst(JWT_TOKEN_HEADER),
+                userPrincipal.getId(),
                 userPrincipal.getFullName(),
                 userPrincipal.getPhone(),
                 userPrincipal.getEmail(),
@@ -124,6 +125,7 @@ public class UserController {
     private User getUser(User loginUser) {
         User userPrincipal = new User();
         userPrincipal.setEmail(loginUser.getEmail());
+        userPrincipal.setId(loginUser.getId());
         userPrincipal.setPassword(loginUser.getPassword());
         userPrincipal.setUserRole(loginUser.getUserRole());
         userPrincipal.setFullName(loginUser.getFullName());
