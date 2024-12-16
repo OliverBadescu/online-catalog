@@ -13,7 +13,8 @@ public class UserMapper {
                 user.getEmail(),
                 user.getPassword(),
                 user.getFullName(),
-                user.getPhone());
+                user.getPhone(),
+                user.getUserRole());
     }
 
     public static User userRequestDtoToUser(CreateUserRequest createUserRequest) {
