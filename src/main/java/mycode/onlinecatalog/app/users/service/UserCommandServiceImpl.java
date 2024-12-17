@@ -11,6 +11,7 @@ import mycode.onlinecatalog.app.users.exceptions.UserAlreadyExists;
 import mycode.onlinecatalog.app.users.mapper.UserMapper;
 import mycode.onlinecatalog.app.users.model.User;
 import mycode.onlinecatalog.app.users.repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,13 +21,14 @@ import java.util.List;
 public class UserCommandServiceImpl implements UserCommandService{
 
     private UserRepository userRepository;
+    private BCryptPasswordEncoder passwordEncoder;
 
 
     @Override
     public UserResponse createUser(CreateUserRequest createUserRequest) {
         User user  = User.builder()
                 .phone(createUserRequest.phone())
-                .password(createUserRequest.password())
+                .password(passwordEncoder.encode(createUserRequest.password()))
                 .fullName(createUserRequest.fullName())
                 .email(createUserRequest.email())
                 .userRole(UserRole.CLIENT)

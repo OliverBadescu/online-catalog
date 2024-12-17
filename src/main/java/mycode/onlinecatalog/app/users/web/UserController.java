@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import static mycode.onlinecatalog.app.system.constants.Constants.JWT_TOKEN_HEADER;
@@ -27,6 +28,7 @@ public class UserController {
     private UserCommandService userCommandService;
     private UserQueryService userQueryService;
     private final JWTTokenProvider jwtTokenProvider;
+    private final AuthenticationManager authenticationManager;
 
     @GetMapping(path = "/getUserById/{userId}")
     public ResponseEntity<UserResponse> getUser(@PathVariable long userId){
@@ -86,6 +88,7 @@ public class UserController {
         User loginUser = userQueryService.findByEmail(user.email());
         User userPrincipal = getUser(loginUser);
 
+        authenticate(user.email(), user.password());
         HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
         LoginResponse loginResponse = new LoginResponse(
                 jwtHeader.getFirst(JWT_TOKEN_HEADER),
@@ -114,6 +117,9 @@ public class UserController {
         return new ResponseEntity<>(registerResponse, jwtHeader, HttpStatus.CREATED);
 
 
+    }
+    private void authenticate(String username, String password) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
     }
 
     private HttpHeaders getJwtHeader(User user) {
